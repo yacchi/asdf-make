@@ -16,6 +16,18 @@ jobs:
           - macos-latest
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Install dependency on ubuntu-latest
+        if: runner.os == "Linux"
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y gpg autoconf
+
+      - name: Install dependency on macos-latest
+        if: runner.os == "macOS"
+        run: |
+          brew update
+          brew install gpg autoconf
+
       - name: asdf_plugin_test
         uses: asdf-vm/actions/plugin-test@v1
         with:

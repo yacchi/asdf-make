@@ -8,9 +8,11 @@
 
 ## macOS
 * [GnuPG](http://www.gnupg.org) - `brew install gpg`
+* [Autoconf](https://www.gnu.org/software/autoconf/) - `brew install autoconf`
 
 ## Linux (Debian)
 * [GnuPG](http://www.gnupg.org) - `apt-get install gpg`
+* [Autoconf](https://www.gnu.org/software/autoconf/) - `apt-get install autoconf`
 
 # Install
 
