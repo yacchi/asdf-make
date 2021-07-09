@@ -56,7 +56,7 @@ download_release() {
 
   if [[ "${GNU_CHECK_SIGNATURES}" == "strict" ]]; then
     curl "${curl_opts[@]}" -o "$gnu_keyring" "$GNU_KEYRING" || fail "Could not download gpg key $gnu_keyring"
-    ${gpg_command} -q --keyring "$gnu_keyring" --verify "$filename.sig" || fail "Failed to GPG verification"
+    ${gpg_command} --keyring "$gnu_keyring" --verify "$filename.sig" 2>/dev/null || fail "Failed to GPG verification"
   fi
 }
 
@@ -75,10 +75,12 @@ install_version() {
     cd "$ASDF_DOWNLOAD_PATH"
 
     echo "* Installing $TOOL_NAME release $version..."
-    ./configure --prefix="$install_path" &&
-      ./build.sh &&
-      ./make &&
-      ./make install &>"$install_log" || fail "Failed to build $TOOL_NAME release $version. install log is $install_log"
+    {
+      ./configure --prefix="$install_path" &&
+        ./build.sh &&
+        ./make &&
+        ./make install
+    } &>"$install_log" || fail "Failed to build $TOOL_NAME release $version. install log is $install_log"
 
     local tool_cmd
     tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
