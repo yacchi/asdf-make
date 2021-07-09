@@ -31,3 +31,5 @@ jobs:
           command: make --version
           gitref: ${{ steps.vars.outputs.short_ref }}
           version: ${{ matrix.version }}
+        env:
+          MAKE_PRINT_BUILD_LOG: "yes"

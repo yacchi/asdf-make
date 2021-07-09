@@ -44,7 +44,8 @@ Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on ho
 install & manage versions.
 
 When installing GNU Make using `asdf install`, you can pass custom configure options with the following env vars:
-* `GNU_CHECK_SIGNATURES` - `strict` is default. Other values are `no`.
+* `MAKE_CHECK_SIGNATURES` - `strict` is default. Other values are `no`.
+* `MAKE_PRINT_BUILD_LOG` - `no` is default. Other value are `yes`.
 
 # Contributing
 Contributions of any kind welcome! See the [contributing guide](contributing.md).
