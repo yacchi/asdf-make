@@ -11,6 +11,7 @@ TOOL_TEST="make --version"
 
 MAKE_CHECK_SIGNATURES="${MAKE_CHECK_SIGNATURES:-strict}"
 MAKE_PRINT_BUILD_LOG="${MAKE_PRINT_BUILD_LOG:-no}"
+MAKE_BUILD_OPTIONS="${MAKE_BUILD_OPTIONS:---with-guile=no}"
 
 current_script_path=${BASH_SOURCE[0]}
 # shellcheck disable=SC2046
@@ -97,6 +98,17 @@ patch_source() {
   esac
 }
 
+patch_build_sh() {
+  local version="$1"
+  local comparable_version
+  comparable_version=$(echo "$version" | awk -F . '{printf "%2d%02d%02d", $1, $2, $3}')
+
+  if [[ $comparable_version -eq 40000 && ${MAKE_BUILD_OPTIONS} =~ --with-guile=no ]]; then
+    # shellcheck disable=SC2016
+    sed -i.bak -e 's/guile.${OBJEXT}//' build.sh
+  fi
+}
+
 install_version() {
   local install_type="$1"
   local version="$2"
@@ -130,16 +142,20 @@ install_version() {
     # At this time, can speed up second time configure by enabling configure caching (-C).
     if [[ "${MAKE_PRINT_BUILD_LOG}" == "yes" ]]; then
       {
-        ./configure -C --prefix="$install_path"
+        # shellcheck disable=SC2086
+        ./configure -C --prefix="$install_path" ${MAKE_BUILD_OPTIONS}
+        patch_build_sh "$version"
         ./build.sh &&
           PATH=$ASDF_DOWNLOAD_PATH:$PATH ./configure -C --prefix="$install_path" &&
           ./make install
       } 2>&1 | tee "$install_log"
     else
       {
-        ./configure -C --prefix="$install_path"
+        # shellcheck disable=SC2086
+        ./configure -C --prefix="$install_path" ${MAKE_BUILD_OPTIONS}
+        patch_build_sh "$version"
         ./build.sh &&
-          PATH=$ASDF_DOWNLOAD_PATH:$PATH ./configure -C --prefix="$install_path" &&
+          PATH=$ASDF_DOWNLOAD_PATH:$PATH ./configure -C --prefix="$install_path" ${MAKE_BUILD_OPTIONS} &&
           ./make install
       } &>"$install_log"
     fi

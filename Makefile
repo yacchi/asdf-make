@@ -28,4 +28,5 @@ $(TEST_GOALS):
 
 test-all: $(TEST_GOALS)
 
-clean: $(TEST_CACHE_DIR)
+clean:
+	rm -rf $(TEST_CACHE_DIR)
