@@ -18,5 +18,10 @@ download_release "$ASDF_INSTALL_VERSION" "$release_file"
 #  Extract contents of tar.gz file into the download directory
 tar -xzf "$release_file" -C "$ASDF_DOWNLOAD_PATH" --strip-components=1 || fail "Could not extract $release_file"
 
+# Drop write protect for each files
+# If the file does not have write permission,
+# will be asked for confirmation during the removal process when the installation is complete.
+find "$ASDF_DOWNLOAD_PATH" -type f -print0 | xargs -0 chmod u+w
+
 # Remove the tar.gz file since we don't need to keep it
 rm "$release_file"
