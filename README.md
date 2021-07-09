@@ -36,7 +36,7 @@ asdf global gnumake latest
 make --version
 ```
 
-## Use
+# Use
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
 install & manage versions.
 
