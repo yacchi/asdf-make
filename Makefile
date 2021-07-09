@@ -1,0 +1,31 @@
+TEST_VERSIONS := $(shell bin/list-all)
+TEST_PREFIX := test-
+TEST_GOALS := $(addprefix $(TEST_PREFIX), $(TEST_VERSIONS))
+TEST_CACHE_DIR := .test_cache
+
+TEST_DOWNLOAD_DIR := downloads
+TEST_INSTALL_DIR := installs
+TEST_COMMAND := $(TEST_INSTALL_DIR)/bin/make --version
+
+all:
+
+$(TEST_GOALS):
+	$(eval TEST_VERSION := $(subst $(TEST_PREFIX),,$@))
+	$(eval TEST_DIR := $(PWD)/$(TEST_CACHE_DIR)/$(TEST_VERSION))
+	mkdir -p $(TEST_CACHE_DIR)/$(TEST_VERSION)
+
+	ASDF_INSTALL_VERSION=$(TEST_VERSION) \
+	ASDF_DOWNLOAD_PATH=$(TEST_DIR)/$(TEST_DOWNLOAD_DIR) \
+		bin/download
+
+	ASDF_INSTALL_VERSION=$(TEST_VERSION) \
+	ASDF_DOWNLOAD_PATH=$(TEST_DIR)/$(TEST_DOWNLOAD_DIR) \
+	ASDF_INSTALL_TYPE=version \
+	ASDF_INSTALL_PATH=$(TEST_DIR)/$(TEST_INSTALL_DIR) \
+		bin/install
+
+	$(TEST_DIR)/$(TEST_COMMAND)
+
+test-all: $(TEST_GOALS)
+
+clean: $(TEST_CACHE_DIR)
