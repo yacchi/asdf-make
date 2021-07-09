@@ -12,6 +12,13 @@ TOOL_TEST="make --version"
 MAKE_CHECK_SIGNATURES="${MAKE_CHECK_SIGNATURES:-strict}"
 MAKE_PRINT_BUILD_LOG="${MAKE_PRINT_BUILD_LOG:-no}"
 
+current_script_path=${BASH_SOURCE[0]}
+# shellcheck disable=SC2046
+plugin_dir=$(
+  cd $(dirname "$(dirname "$current_script_path")")
+  pwd
+)
+
 fail() {
   echo -e "asdf-$TOOL_NAME: $*"
   exit 1
@@ -61,6 +68,28 @@ download_release() {
   fi
 }
 
+patch_source() {
+  local version="$1"
+  local glibc_version comparable_version
+  comparable_version=$(echo "$version" | awk -F . '{printf "%2d%02d%02d", $1, $2, $3}')
+
+  case $(uname) in
+  Linux)
+    glibc_version=$(ldd --version | grep -oE '2\.[0-9]{2}' | uniq | awk -F. '{printf "%2d%02d", $1, $2}')
+
+    # glibc glob interface patch
+    # http://gnu-make.2324884.n4.nabble.com/undefined-reference-to-alloca-td18308.html
+    if [[ 226 -lt $glibc_version && $comparable_version -le 40201 ]]; then
+      echo "* Patching glob interface of $TOOL_NAME release $version..."
+      patch -p1 -s <"$plugin_dir/patchers/support-glibc-glob-interface-version2.patch"
+    fi
+
+    ;;
+  Darwin) ;;
+
+  esac
+}
+
 install_version() {
   local install_type="$1"
   local version="$2"
@@ -74,6 +103,8 @@ install_version() {
   (
     mkdir -p "$install_path"
     cd "$ASDF_DOWNLOAD_PATH"
+
+    patch_source "$version"
 
     echo "* Installing $TOOL_NAME release $version..."
     # If the make command is not installed on system old version, may get an error like the following:
