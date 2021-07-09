@@ -84,6 +84,13 @@ patch_source() {
       patch -p1 -s <"$plugin_dir/patchers/support-glibc-glob-interface-version2.patch"
     fi
 
+    # segmentation fault on make install fix patch
+    # https://stackoverflow.com/questions/52618055/gnu-make-3-82-on-ubuntu-18-04-segfault-in-glob-call
+    if [[ $comparable_version -eq 38200 ]]; then
+      echo "* Patching lstat interface of $TOOL_NAME release $version..."
+      patch -s <"$plugin_dir/patchers/fix-segmentation-fault-3.82-on-linux.patch"
+    fi
+
     ;;
   Darwin) ;;
 
