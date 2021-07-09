@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - develop
   pull_request:
 
 jobs:
@@ -28,7 +29,12 @@ jobs:
           brew update
           brew install gpg
 
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
       - name: asdf_plugin_test
         uses: asdf-vm/actions/plugin-test@v1
         with:
           command: make --version
+          gitref: ${{ steps.vars.outputs.short_ref }}
