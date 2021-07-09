@@ -5,12 +5,15 @@
 # Dependencies
 
 - `bash`, `curl`, `tar`: generic POSIX utilities.
+- A C compiler
 
 ## macOS
 * [GnuPG](http://www.gnupg.org) - `brew install gpg`
+* Xcode Command line tools - `xcode-select --install`
 
 ## Linux (Debian)
 * [GnuPG](http://www.gnupg.org) - `apt-get install gpg`
+* [GCC](http://gcc.gnu.org/) - `apt-get install gcc`
 
 # Install
 
