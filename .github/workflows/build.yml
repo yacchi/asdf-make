@@ -17,18 +17,6 @@ jobs:
           - macos-latest
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Install dependency on ubuntu-latest
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y gpg
-
-      - name: Install dependency on macos-latest
-        if: runner.os == 'macOS'
-        run: |
-          brew update
-          brew install gpg
-
       - name: Set output
         id: vars
         run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
