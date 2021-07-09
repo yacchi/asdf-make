@@ -6,7 +6,7 @@ GNU_TOOL="make"
 #GNU_KEYRING=$GNU_FTP/gnu/gnu-keyring.gpg
 GNU_FTP=https://ftp.gnu.org/gnu
 GNU_KEYRING=$GNU_FTP/gnu-keyring.gpg
-TOOL_NAME="gnumake"
+TOOL_NAME="make"
 TOOL_TEST="make --version"
 
 GNU_CHECK_SIGNATURES="${GNU_CHECK_SIGNATURES:-strict}"

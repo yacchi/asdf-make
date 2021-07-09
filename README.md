@@ -1,4 +1,4 @@
-# asdf-gnumake [![Build](https://github.com/yacchi/asdf-gnumake/actions/workflows/build.yml/badge.svg)](https://github.com/yacchi/asdf-gnumake/actions/workflows/build.yml) [![Lint](https://github.com/yacchi/asdf-gnumake/actions/workflows/lint.yml/badge.svg)](https://github.com/yacchi/asdf-gnumake/actions/workflows/lint.yml)
+# asdf-make [![Build](https://github.com/yacchi/asdf-make/actions/workflows/build.yml/badge.svg)](https://github.com/yacchi/asdf-make/actions/workflows/build.yml) [![Lint](https://github.com/yacchi/asdf-make/actions/workflows/lint.yml/badge.svg)](https://github.com/yacchi/asdf-make/actions/workflows/lint.yml)
 
 [GNU Make](https://www.gnu.org/software/make/) plugin for the [asdf version manager](https://asdf-vm.com).
 
@@ -19,21 +19,21 @@
 
 ## Plugin
 ```shell
-asdf plugin add gnumake
+asdf plugin add make
 # or
-asdf plugin add gnumake https://github.com/yacchi/asdf-gnumake.git
+asdf plugin add make https://github.com/yacchi/asdf-make.git
 ```
 
-## gnumake
+## make
 ```shell
 # Show all installable versions
-asdf list-all gnumake
+asdf list-all make
 
 # Install specific version
-asdf install gnumake latest
+asdf install make latest
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global gnumake latest
+asdf global make latest
 
 # Now make commands are available
 make --version
@@ -50,4 +50,4 @@ When installing GNU Make using `asdf install`, you can pass custom configure opt
 Contributions of any kind welcome! See the [contributing guide](contributing.md).
 
 # License
-See [LICENSE](https://github.com/yacchi/asdf-gnumake/blob/main/LICENSE) © [Yasunori Fujie](https://github.com/yacchi/)
+See [LICENSE](https://github.com/yacchi/asdf-make/blob/main/LICENSE) © [Yasunori Fujie](https://github.com/yacchi/)
