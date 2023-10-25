@@ -22,7 +22,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Install GPG keys
-        run: gpg -v --keyserver keyserver.ubuntu.com --recv-keys 96B047156338B6D4 80CB727A20C79BB2
+        run: |
+          wget -q https://ftp.gnu.org/gnu/gnu-keyring.gpg
+          gpg --import gnu-keyring.gpg
 
       - name: asdf_plugin_test
         uses: asdf-vm/actions/plugin-test@v3
