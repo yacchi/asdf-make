@@ -24,6 +24,24 @@ asdf plugin add make
 asdf plugin add make https://github.com/yacchi/asdf-make.git
 ```
 
+## Import GPG public key
+If a `GPG verification error` occurs, key import is required.
+The following commands can be used to import keys.
+
+___Adding keys is at your own risk. For more information, please check the GNU Make project's site.___
+
+- https://savannah.gnu.org/projects/make
+- https://make.mad-scientist.net/
+- https://www.gnu.org/software/security/security.html
+
+```shell
+gpg --recv-keys 96B047156338B6D4 80CB727A20C79BB2
+# or
+gpg --keyserver keys.gnupg.net --recv-keys 96B047156338B6D4 80CB727A20C79BB2
+# or
+gpg --keyserver keyserver.ubuntu.com --recv-keys 96B047156338B6D4 80CB727A20C79BB2
+```
+
 ## make
 ```shell
 # Show all installable versions
