@@ -5,19 +5,22 @@
 # Dependencies
 
 - `bash`, `curl`, `tar`: generic POSIX utilities.
-- A C compiler
+- A C compiler or build environment (e.g. build-essentials).
 
 ## macOS
+
 * [GnuPG](http://www.gnupg.org) - `brew install gpg`
 * Xcode Command line tools - `xcode-select --install`
 
 ## Linux (Debian)
+
 * [GnuPG](http://www.gnupg.org) - `apt-get install gpg`
 * [GCC](http://gcc.gnu.org/) - `apt-get install gcc`
 
 # Install
 
 ## Plugin
+
 ```shell
 asdf plugin add make
 # or
@@ -25,6 +28,7 @@ asdf plugin add make https://github.com/yacchi/asdf-make.git
 ```
 
 ## Import GPG public key
+
 If a `GPG verification error` occurs, key import is required.
 The following commands can be used to import keys.
 
@@ -43,6 +47,7 @@ gpg --keyserver keyserver.ubuntu.com --recv-keys 96B047156338B6D4 80CB727A20C79B
 ```
 
 ## make
+
 ```shell
 # Show all installable versions
 asdf list-all make
@@ -58,16 +63,22 @@ make --version
 ```
 
 # Use
+
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
 install & manage versions.
 
 When installing GNU Make using `asdf install`, you can pass custom configure options with the following env vars:
-* `MAKE_CHECK_SIGNATURES` - `strict` is default. Other values are `no`.
-* `MAKE_PRINT_BUILD_LOG` - `no` is default. Other value are `yes`.
-* `MAKE_BUILD_OPTIONS` - `--with-guile=no` is default.
+
+| Environment Variable  | Default Value   | Other Values | Description                |
+|-----------------------|-----------------|--------------|----------------------------|
+| MAKE_CHECK_SIGNATURES | strict          | no           | GPG signature verification |
+| MAKE_PRINT_BUILD_LOG  | no              | yes          | Display build log          |
+| MAKE_BUILD_OPTIONS    | --with-guile=no |              | Build options              |
 
 # Contributing
+
 Contributions of any kind welcome! See the [contributing guide](contributing.md).
 
 # License
+
 See [LICENSE](https://github.com/yacchi/asdf-make/blob/main/LICENSE) © [Yasunori Fujie](https://github.com/yacchi/)
