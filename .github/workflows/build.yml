@@ -21,18 +21,12 @@ jobs:
           - 4.3
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Set output
-        id: vars
-        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
-
       - name: Install GPG keys
         run: gpg --recv-keys 96B047156338B6D4 80CB727A20C79BB2
 
       - name: asdf_plugin_test
-        uses: asdf-vm/actions/plugin-test@v1
+        uses: asdf-vm/actions/plugin-test@v2
         with:
           command: make --version
-          gitref: ${{ steps.vars.outputs.short_ref }}
-          version: ${{ matrix.version }}
         env:
           MAKE_PRINT_BUILD_LOG: "yes"
