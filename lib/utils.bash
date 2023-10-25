@@ -45,7 +45,7 @@ list_all_versions() {
 }
 
 download_release() {
-  local version filename url sig_url gnu_keyring gpg_command
+  local version filename url sig_url gnu_keyring gpg_command detail
   version="$1"
   filename="$2"
 
@@ -65,7 +65,9 @@ download_release() {
 
   if [[ "${MAKE_CHECK_SIGNATURES}" == "strict" ]]; then
     curl "${curl_opts[@]}" -o "$gnu_keyring" "$GNU_KEYRING" || fail "Could not download gpg key $gnu_keyring"
-    ${gpg_command} --keyring "$gnu_keyring" --verify "$filename.sig" 2>/dev/null || fail "Failed to GPG verification"
+    if ! detail=$(${gpg_command} --keyring "$gnu_keyring" --verify "$filename.sig"); then
+      fail "Failed to GPG verification:\n$detail"
+    fi
   fi
 }
 
