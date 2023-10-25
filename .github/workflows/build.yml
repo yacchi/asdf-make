@@ -18,7 +18,7 @@ jobs:
         version:
           - 3.82
           - 4.2.1
-          - 4.3
+          - 4.4.1
     runs-on: ${{ matrix.os }}
     steps:
       - name: Install GPG keys
