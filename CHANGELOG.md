@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/yacchi/asdf-make/compare/v2.0.0...v2.1.0) (2024-06-26)
+
+
+### Features
+
+* add jp README ([2f12c4d](https://github.com/yacchi/asdf-make/commit/2f12c4d09083e41c6eaeaef196ce6d8f1a96ff79))
+
 ## [2.0.0](https://github.com/yacchi/asdf-make/compare/v1.2.0...v2.0.0) (2023-10-25)
 
 
