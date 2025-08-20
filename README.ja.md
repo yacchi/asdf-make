@@ -18,7 +18,7 @@
 ## Linux (Debian)
 
 - [GnuPG](http://www.gnupg.org) - `apt-get install gpg`
-- [GCC](http://gcc.gnu.org/) - `apt-get install build-essentials`
+- [GCC](http://gcc.gnu.org/) - `apt-get install gcc`
 
 # インストール
 
@@ -53,18 +53,30 @@ gpg --keyserver keyserver.ubuntu.com --recv-keys 96B047156338B6D4 80CB727A20C79B
 ```shell
 # すべてのインストール可能なバージョンを表示
 asdf list-all make
+
 # 特定のバージョンをインストール
 asdf install make latest
+
 # グローバルにバージョンを設定（~/ .tool-versionsファイルで）
 asdf global make latest
+
 # これでmakeコマンドが利用可能になります
 make --version
 ```
 
-# 設定
+## GPGミラーの使用
 
-[asdf](https://github.com/asdf-vm/asdf)のREADMEを参照し、インストールとバージョンの管理方法についての詳細な指示を確認してください。GNU
-Makeを`asdf install`を使ってインストールする際、以下の環境変数でカスタム設定オプションを渡すことができます：
+タイムアウトのためダウンロードに失敗した場合、`MAKE_CUSTOM_MIRROR`を使用して[ミラー](https://www.gnu.org/prep/ftp.html)を試すことができます。例：
+
+```shell
+MAKE_CUSTOM_MIRROR= asdf install make latest
+```
+
+# 使い方
+
+[asdf](https://github.com/asdf-vm/asdf)のREADMEを参照し、インストールとバージョンの管理方法についての詳細な指示を確認してください。
+
+GNU Makeを`asdf install`を使ってインストールする際、以下の環境変数でカスタム設定オプションを渡すことができます：
 
 | 環境変数                  | デフォルト値          | 他の値 | 説明       |
 |-----------------------|-----------------|-----|----------|
