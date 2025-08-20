@@ -4,7 +4,7 @@ set -euo pipefail
 GNU_TOOL="make"
 #GNU_FTP=https://ftpmirror.gnu.org
 #GNU_KEYRING=$GNU_FTP/gnu/gnu-keyring.gpg
-GNU_FTP=https://ftp.gnu.org/gnu
+GNU_FTP=${MAKE_CUSTOM_MIRROR:-https://ftp.gnu.org/gnu}
 GNU_KEYRING=$GNU_FTP/gnu-keyring.gpg
 TOOL_NAME="make"
 TOOL_TEST="make --version"

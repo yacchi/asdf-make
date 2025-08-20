@@ -62,6 +62,16 @@ asdf global make latest
 make --version
 ```
 
+## Use gpg mirror
+
+If download failed because of timeout, you can try with a
+[mirror](https://www.gnu.org/prep/ftp.html) using `MAKE_CUSTOM_MIRROR`, for
+example:
+
+```shell
+MAKE_CUSTOM_MIRROR= asdf install make latest
+```
+
 # Use
 
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
