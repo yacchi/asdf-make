@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.0](https://github.com/yacchi/asdf-make/compare/v2.1.0...v2.2.0) (2025-08-21)
+
+
+### Features
+
+* add MAKE_CUSTOM_MIRROR environment variable to specify mirror ([87eda8d](https://github.com/yacchi/asdf-make/commit/87eda8d76458425b2e1331c6e15ab75121efcb8f))
+* add MAKE_CUSTOM_MIRROR environment variable to use GNU mirror [#23](https://github.com/yacchi/asdf-make/issues/23) ([b0aa63a](https://github.com/yacchi/asdf-make/commit/b0aa63a7410bfdadcc4062db52263d3a637e13ed))
+
 ## [2.1.0](https://github.com/yacchi/asdf-make/compare/v2.0.0...v2.1.0) (2024-06-26)
 
 
